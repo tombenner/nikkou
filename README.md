@@ -7,6 +7,15 @@ Description
 
 Nikkou adds additional methods to Nokogiri to make extracting commonly-used data from HTML and XML easier. It lets you transform HTML into structured data very quickly, and it integrates nicely with [Mechanize](https://github.com/sparklemotion/mechanize).
 
+Installation
+------------
+
+Add Nikkou to your Gemfile:
+
+```ruby
+gem 'nikkou'
+```
+
 Method Overview
 ---------------
 
