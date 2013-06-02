@@ -5,7 +5,7 @@ require 'tzinfo'
 module Nikkou
 end
 
-directory = Pathname.new(File.dirname(File.absolute_path(__FILE__)))
+directory = Pathname.new(File.dirname(__FILE__))
 Dir.glob(directory.join('nikkou', '*.rb')) { |file| require file }
 Dir.glob(directory.join('nikkou', '**/*.rb')) { |file| require file }
 
