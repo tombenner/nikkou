@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    nikkou (0.0.2)
+    nikkou (0.0.3)
       activesupport
       nokogiri
       tzinfo
@@ -9,11 +9,11 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
-    activesupport (3.2.11)
-      i18n (~> 0.6)
+    activesupport (3.2.13)
+      i18n (= 0.6.1)
       multi_json (~> 1.0)
     diff-lcs (1.1.3)
-    i18n (0.6.4)
+    i18n (0.6.1)
     multi_json (1.7.3)
     nokogiri (1.5.9)
     rake (10.0.3)
