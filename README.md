@@ -2,6 +2,8 @@ Nikkou
 ======
 Extract useful data from HTML and XML with ease!
 
+[<img src="https://secure.travis-ci.org/tombenner/nikkou.png" />](http://travis-ci.org/tombenner/nikkou)
+
 Description
 -----------
 
