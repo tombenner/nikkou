@@ -123,7 +123,7 @@ Selects nodes where the specified attribute includes the string.
 
 ```ruby
 # <div data-type="major-news">My Text</div>
-doc.attr_equals('data-type', 'news').first.text # "My Text"
+doc.attr_includes('data-type', 'news').first.text # "My Text"
 ```
 
 #### attr_matches(attribute, pattern)
