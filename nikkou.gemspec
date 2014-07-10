@@ -8,6 +8,7 @@ Gem::Specification.new do |s|
   s.email       = ['tombenner@gmail.com']
   s.homepage    = 'https://github.com/tombenner/nikkou'
   s.summary = s.description = 'Extract useful data from HTML and XML with ease!'
+  s.license     = 'MIT'
 
   s.files = Dir['lib/**/*'] + ['MIT-LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['spec/**/*']
