@@ -1,10 +1,11 @@
 module Nikkou
   module Nokogiri
     module XML
+      # Extends the Nokogiri Nodeset
       module NodeSet
         include Nikkou::Drillable
         include Nikkou::Findable
-        
+
         def attr_equals(attribute, string)
           list = select do |node|
             return false if node.attr(attribute).nil?
@@ -12,7 +13,7 @@ module Nikkou
           end
           self.class.new(document, list)
         end
-        
+
         def attr_includes(attribute, string)
           list = select do |node|
             return false if node.attr(attribute).nil?
@@ -20,7 +21,7 @@ module Nikkou
           end
           self.class.new(document, list)
         end
-        
+
         def attr_matches(attribute, pattern)
           list = []
           each do |node|
@@ -32,7 +33,7 @@ module Nikkou
           end
           self.class.new(document, list)
         end
-        
+
         def text_equals(string)
           list = select do |node|
             next if node.is_a?(::Nokogiri::XML::Text)
@@ -40,7 +41,7 @@ module Nikkou
           end
           self.class.new(document, list)
         end
-        
+
         def text_includes(string)
           list = select do |node|
             next if node.is_a?(::Nokogiri::XML::Text)

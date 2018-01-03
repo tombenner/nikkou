@@ -6,7 +6,7 @@ describe Nokogiri::XML::Node do
     html_file = File.join(assets_directory, 'test.html')
     @html = Nokogiri::HTML.parse(File.read(html_file))
     @html.uri = 'http://www.loremipsum.com/page/2'
-    
+
     # Set the time zone for .time
     Time.zone = 'Pacific Time (US & Canada)'
   end
@@ -49,29 +49,38 @@ describe Nokogiri::XML::Node do
     end
   end
 
-  describe '.text_equals' do
-    it 'finds nodes' do
-      nodes = @html.search('body').first.text_equals('ipsum')
-      nodes.first.text.should == 'ipsum'
-    end
-  end
-
-  describe '.text_includes' do
-    it 'finds nodes' do
-      nodes = @html.search('body').first.text_includes('ipsum')
-      nodes.first.text.should == 'ipsum'
-    end
-  end
-
-  describe '.text_matches' do
-    it 'finds nodes' do
-      nodes = @html.search('body').first.text_matches(/(\d+) comments/)
-      nodes.first.text.should == '12 comments'
+  context '.text' do
+    describe 'equals' do
+      it 'finds nodes' do
+        nodes = @html.search('body').first.text_equals('ipsum')
+        nodes.first.text.should == 'ipsum'
+      end
     end
 
-    it 'sets matches' do
-      nodes = @html.search('body').first.text_matches(/(\d+) comments/)
-      nodes.first.matches.should == ['12 comments', '12']
+    describe 'includes' do
+      it 'finds nodes' do
+        nodes = @html.search('body').first.text_includes('ipsum')
+        nodes.first.text.should == 'ipsum'
+      end
+    end
+
+    describe 'matches' do
+      it 'finds nodes' do
+        nodes = @html.search('body').first.text_matches(/(\d+) comments/)
+        nodes.first.text.should == '12 comments'
+      end
+
+      it 'sets matches' do
+        nodes = @html.search('body').first.text_matches(/(\d+) comments/)
+        nodes.first.matches.should == ['12 comments', '12']
+      end
+    end
+
+    describe 'fuzzy_match' do
+      it 'finds nodes' do
+        nodes = @html.search('body').first.text_fuzzy_matches('ipsux')
+        nodes.first.text.should == 'ipsum'
+      end
     end
   end
 

@@ -6,7 +6,7 @@ module Nikkou
         include Nikkou::Findable
 
         attr_accessor :matches
-        
+
         def attr_equals(attribute, string)
           list = []
           traverse do |node|
@@ -14,7 +14,7 @@ module Nikkou
           end
           ::Nokogiri::XML::NodeSet.new(document, list)
         end
-        
+
         def attr_includes(attribute, string)
           list = []
           traverse do |node|
@@ -23,7 +23,7 @@ module Nikkou
           end
           ::Nokogiri::XML::NodeSet.new(document, list)
         end
-        
+
         def attr_matches(attribute, pattern)
           list = []
           traverse do |node|
@@ -39,7 +39,7 @@ module Nikkou
         def parse_text
           parse(text)
         end
-        
+
         def text_equals(string)
           list = []
           traverse do |node|
@@ -48,7 +48,7 @@ module Nikkou
           end
           ::Nokogiri::XML::NodeSet.new(document, list)
         end
-        
+
         def text_includes(string)
           list = []
           traverse do |node|
@@ -57,6 +57,7 @@ module Nikkou
           end
           ::Nokogiri::XML::NodeSet.new(document, list)
         end
+        alias text_contains text_includes
 
         def text_matches(pattern)
           list = []
@@ -64,6 +65,20 @@ module Nikkou
             next if node.is_a?(::Nokogiri::XML::Text)
             if node.text.match(pattern)
               node.matches = $~.to_a
+              list << node
+            end
+          end
+          ::Nokogiri::XML::NodeSet.new(document, list)
+        end
+
+        # Uses AMatch to fuzzy match the pattern supplied, expects a score
+        # above a threshold to be included in the match
+        def text_fuzzy_matches(pattern, threshold = 0.90)
+          list = []
+          matcher = Amatch::JaroWinkler.new(pattern)
+          traverse do |node|
+            next if node.is_a?(::Nokogiri::XML::Text)
+            if matcher.match(node.text) > threshold
               list << node
             end
           end
