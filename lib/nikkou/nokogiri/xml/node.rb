@@ -103,7 +103,7 @@ module Nikkou
           time_zone.local_to_utc(time)
         end
 
-        def url(attribute='href')
+        def url(attribute = 'href')
           return nil if attr(attribute).nil?
           href = attr(attribute)
           return href if href =~ /^https?:\/\//

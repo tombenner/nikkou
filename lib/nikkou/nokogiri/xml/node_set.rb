@@ -49,6 +49,7 @@ module Nikkou
           end
           self.class.new(document, list)
         end
+        alias text_contains text_includes
 
         def text_matches(pattern)
           list = []
@@ -56,6 +57,20 @@ module Nikkou
             next if node.is_a?(::Nokogiri::XML::Text)
             if node.text.match(pattern)
               node.matches = $~.to_a
+              list << node
+            end
+          end
+          self.class.new(document, list)
+        end
+
+        # Uses AMatch to fuzzy match the pattern supplied, expects a score
+        # above a threshold to be included in the match
+        def text_fuzzy_matches(pattern, threshold = 0.90)
+          list = []
+          matcher = Amatch::JaroWinkler.new(pattern)
+          each do |node|
+            next if node.is_a?(::Nokogiri::XML::Text)
+            if matcher.match(node.text) > threshold
               list << node
             end
           end
